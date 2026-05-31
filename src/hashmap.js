@@ -55,12 +55,22 @@ export class HashMap {
     }
     return false;
   }
+
+  length() {
+    const keys = this.buckets.reduce((sum, current) => {
+      if(!current) return sum;
+      return sum + current.size();
+    }, 0);
+    return keys;
+  }
 }
 
 const hashMap = new HashMap();
 hashMap.set("Rama", 18);
-hashMap.set("Sita", 122);
-hashMap.set("Sita", 12);
-console.log(hashMap.remove("Rama"));
+// hashMap.set("Sita", 122);
+// hashMap.set("bruno", 1120);
+// console.log(hashMap.remove("Rama"));
 
-console.log(hashMap.buckets[3])
+// console.log(hashMap.buckets[3])
+
+console.log(hashMap.length());
