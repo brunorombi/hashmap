@@ -129,6 +129,20 @@ export class LinkedList {
 
     return `${nodeString.slice(0, -3)} -> null`;
   }
+
+  keys() {
+    const arr = [];
+
+    let current = this.list;
+
+    while(current !== null) {
+      arr.push(current.key);
+
+      current = current.nextNode;
+    }
+    
+    return arr;
+  }
 }
 
 class Node {

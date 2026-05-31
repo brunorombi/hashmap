@@ -67,6 +67,18 @@ export class HashMap {
   clear() {
     this.buckets.fill(undefined);
   }
+
+  keys() { 
+    const result = [];
+
+    this.buckets.forEach((bucket) => {
+      if(bucket) {
+        result.push(...bucket.keys());
+      }
+    })
+
+    return result;
+  }
 }
 
 const hashMap = new HashMap();
@@ -78,5 +90,4 @@ hashMap.set("bruno", 1120);
 // console.log(hashMap.buckets[3])
 
 console.log(hashMap.length());
-console.log(hashMap.clear())
-console.log(hashMap.length());
+console.log(hashMap.keys());
