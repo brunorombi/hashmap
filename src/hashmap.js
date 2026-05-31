@@ -6,7 +6,7 @@ export class HashMap {
     this.capacity = 16;
     this.buckets = new Array(this.capacity);
   }
-  
+
   hash(key) {
     let hashCode = 0;
 
@@ -21,11 +21,11 @@ export class HashMap {
   set(key, value) {
     const index = this.hash(key);
 
-    if(this.buckets[index] === undefined) {
-        this.buckets[index] = new LinkedList();
-        this.buckets[index].append(key, value);
-        console.log(this.buckets[index].toString());
-        return;
+    if (this.buckets[index] === undefined) {
+      this.buckets[index] = new LinkedList();
+      this.buckets[index].append(key, value);
+      console.log(this.buckets[index].toString());
+      return;
     }
     this.buckets[index].append(key, value);
     console.log(this.buckets[index].toString());
@@ -33,20 +33,34 @@ export class HashMap {
 
   get(key) {
     const index = this.hash(key);
-    if(this.buckets[index] !== undefined) {
+    if (this.buckets[index] !== undefined) {
       return this.buckets[index].findValue(key);
     }
     return null;
   }
 
   has(key) {
-    const hasKey = this.buckets.some(bucket => bucket.contains(key));
+    const index = this.hash(key);
+    let hasKey = false;
+    if (this.buckets[index] !== undefined) {
+      hasKey = this.buckets[index].contains(key);
+    }
     return hasKey;
+  }
+
+  remove(key) {
+    const index = this.hash(key);
+    if (this.buckets[index] !== undefined) {
+      return this.buckets[index].remove(key);
+    }
+    return false;
   }
 }
 
 const hashMap = new HashMap();
 hashMap.set("Rama", 18);
-// hashMap.set("Sita", 122);
-console.log(hashMap.get("Rama"));
-console.log(hashMap.has("Sita"));
+hashMap.set("Sita", 122);
+hashMap.set("Sita", 12);
+console.log(hashMap.remove("Rama"));
+
+console.log(hashMap.buckets[3])

@@ -12,18 +12,23 @@ export class LinkedList {
       let current = this.list;
 
       while (current.nextNode !== null) {
-        if(current.key = node.key) {
-            this.update(current, value)
-            return;
+        if (current.key === key) {
+          this.update(current, value);
+          return;
         }
         current = current.nextNode;
       }
+
+      if (current.key === key) {
+        this.update(current, value);
+        return;
+      }
+
       current.nextNode = node;
     }
   }
 
   update(node, value) {
-    const newValue = value;
     node.value = value;
   }
 
@@ -54,25 +59,47 @@ export class LinkedList {
   findValue(key) {
     let current = this.list;
 
-      while (current.nextNode !== null) {
-        if(current.key === key) {
-            return current.value;
-        }
-        current = current.nextNode;
+    while (current !== null) {
+      if (current.key === key) {
+        return current.value;
       }
-      return null;
+      current = current.nextNode;
+    }
+    return null;
   }
 
   contains(key) {
-    if (!this.list) return undefined;
+    if (!this.list) return false;
 
     let current = this.list;
 
-    while (current.nextNode !== null) {
+    while (current !== null) {
       if (current.key === key) return true;
       current = current.nextNode;
     }
 
+    return false;
+  }
+
+  remove(key) {
+    if (!this.list) return false;
+
+    let previous = null;
+    let current = this.list;
+
+    while (current !== null) {
+      if (current.key === key) {
+        if(previous === null) {
+          this.list = current.nextNode;
+          return true;
+        } else {
+          previous.nextNode = current.nextNode;
+          return true;
+        }
+      }
+      previous = current;
+      current = current.nextNode;
+    }
     return false;
   }
 
@@ -84,19 +111,19 @@ export class LinkedList {
 
     while (item) {
       if (item.key === key) return index;
-      
+
       index++;
       item = item.nextNode;
     }
     return -1;
   }
 
-    toString() {
+  toString() {
     let nodeString = "";
 
     let item = this.list;
     while (item) {
-      nodeString += ` ( ${item.key.toString()}, ${item.value.toString()}} ) ->`
+      nodeString += ` ( ${item.key.toString()}, ${item.value.toString()}} ) ->`;
       item = item.nextNode;
     }
 
