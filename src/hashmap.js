@@ -6,6 +6,17 @@ export class HashMap {
     this.capacity = 16;
     this.buckets = new Array(this.capacity);
   }
+  
+  hash(key) {
+    let hashCode = 0;
+
+    const primeNumber = 31;
+    for (let i = 0; i < key.length; i++) {
+      hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % this.capacity;
+    }
+
+    return hashCode;
+  }
 
   set(key, value) {
     const index = this.hash(key);
@@ -20,19 +31,16 @@ export class HashMap {
     console.log(this.buckets[index].toString());
   }
 
-  hash(key) {
-    let hashCode = 0;
-
-    const primeNumber = 31;
-    for (let i = 0; i < key.length; i++) {
-      hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % this.capacity;
+  get(key) {
+    const index = this.hash(key);
+    if(this.buckets[index] !== undefined) {
+      return this.buckets[index].findValue(key);
     }
-
-    return hashCode;
+    return null;
   }
 }
 
 const hashMap = new HashMap();
 hashMap.set("Rama", 18);
 hashMap.set("Sita", 122);
-hashMap.set("Rama", 'Novo valor');
+console.log(hashMap.get("Rama"));

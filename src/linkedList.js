@@ -51,6 +51,18 @@ export class LinkedList {
     return head.value;
   }
 
+  findValue(key) {
+    let current = this.list;
+
+      while (current.nextNode !== null) {
+        if(current.key === key) {
+            return current.value;
+        }
+        current = current.nextNode;
+      }
+      return null;
+  }
+
   contains(key) {
     if (!this.list) return undefined;
 
