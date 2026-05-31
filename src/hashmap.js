@@ -63,14 +63,20 @@ export class HashMap {
     }, 0);
     return keys;
   }
+
+  clear() {
+    this.buckets.fill(undefined);
+  }
 }
 
 const hashMap = new HashMap();
 hashMap.set("Rama", 18);
-// hashMap.set("Sita", 122);
-// hashMap.set("bruno", 1120);
+hashMap.set("Sita", 122);
+hashMap.set("bruno", 1120);
 // console.log(hashMap.remove("Rama"));
 
 // console.log(hashMap.buckets[3])
 
+console.log(hashMap.length());
+console.log(hashMap.clear())
 console.log(hashMap.length());
