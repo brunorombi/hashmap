@@ -38,9 +38,15 @@ export class HashMap {
     }
     return null;
   }
+
+  has(key) {
+    const hasKey = this.buckets.some(bucket => bucket.contains(key));
+    return hasKey;
+  }
 }
 
 const hashMap = new HashMap();
 hashMap.set("Rama", 18);
-hashMap.set("Sita", 122);
+// hashMap.set("Sita", 122);
 console.log(hashMap.get("Rama"));
+console.log(hashMap.has("Sita"));

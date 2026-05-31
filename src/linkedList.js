@@ -66,12 +66,11 @@ export class LinkedList {
   contains(key) {
     if (!this.list) return undefined;
 
-    let item = this.list;
+    let current = this.list;
 
-    while (item) {
-      if (item.key === key) return true;
-
-      item = item.nextNode;
+    while (current.nextNode !== null) {
+      if (current.key === key) return true;
+      current = current.nextNode;
     }
 
     return false;
