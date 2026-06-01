@@ -5,6 +5,7 @@ export class HashMap {
     this.loadFactor = 0.75;
     this.capacity = 16;
     this.buckets = new Array(this.capacity);
+    this.size = 0;
   }
 
   hash(key) {
@@ -24,11 +25,37 @@ export class HashMap {
     if (this.buckets[index] === undefined) {
       this.buckets[index] = new LinkedList();
       this.buckets[index].append(key, value);
-      console.log(this.buckets[index].toString());
       return;
     }
-    this.buckets[index].append(key, value);
-    console.log(this.buckets[index].toString());
+    if(!this.buckets[index].append(key, value)) {
+      this.size++;
+      if(this.size >= (this.capacity * this.loadFactor)) {
+        this.resize();
+      }
+     }
+    // console.log(this.buckets[index].toString());
+  }
+
+  resize() {
+    const oldHash = this.buckets;
+
+    this.size = 0;
+
+    this.capacity = this.capacity * 2;
+
+    this.buckets = Array(this.capacity);
+
+    oldHash.forEach(bucket => {
+      if(!bucket) {
+        let current = bucket.list;
+        
+        while(current !== null) {
+          this.buckets.set(current.key, current.value)
+
+          current = current.nextNode;
+        }
+      }
+    })
   }
 
   get(key) {
@@ -104,16 +131,3 @@ export class HashMap {
     return result;
   }
 }
-
-const hashMap = new HashMap();
-hashMap.set("Rama", 18);
-hashMap.set("Sita", 122);
-hashMap.set("bruno", 1120);
-// console.log(hashMap.remove("Rama"));
-
-// console.log(hashMap.buckets[3])
-
-console.log(hashMap.length());
-console.log(hashMap.keys());
-console.log(hashMap.values());
-console.log(hashMap.entries());

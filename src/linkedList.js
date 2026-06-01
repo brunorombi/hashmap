@@ -30,6 +30,7 @@ export class LinkedList {
 
   update(node, value) {
     node.value = value;
+    return true;
   }
 
   size() {
