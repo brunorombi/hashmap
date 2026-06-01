@@ -25,11 +25,12 @@ export class HashMap {
     if (this.buckets[index] === undefined) {
       this.buckets[index] = new LinkedList();
       this.buckets[index].append(key, value);
+      this.size++;
       return;
     }
     if(!this.buckets[index].append(key, value)) {
       this.size++;
-      if(this.size >= (this.capacity * this.loadFactor)) {
+      if(this.size > (this.capacity * this.loadFactor)) {
         this.resize();
       }
      }
@@ -39,23 +40,23 @@ export class HashMap {
   resize() {
     const oldHash = this.buckets;
 
-    this.size = 0;
+    // this.size = 0;
 
     this.capacity = this.capacity * 2;
 
-    this.buckets = Array(this.capacity);
+    // this.buckets = Array(this.capacity);
 
-    oldHash.forEach(bucket => {
-      if(!bucket) {
-        let current = bucket.list;
+    // oldHash.forEach(bucket => {
+    //   if(!bucket) {
+    //     let current = bucket.list;
         
-        while(current !== null) {
-          this.buckets.set(current.key, current.value)
+    //     while(current !== null) {
+    //       this.buckets.set(current.key, current.value)
 
-          current = current.nextNode;
-        }
-      }
-    })
+    //       current = current.nextNode;
+    //     }
+    //   }
+    // })
   }
 
   get(key) {

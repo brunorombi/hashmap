@@ -14,14 +14,14 @@ export class LinkedList {
       while (current.nextNode !== null) {
         if (current.key === key) {
           this.update(current, value);
-          return;
+          return true;
         }
         current = current.nextNode;
       }
 
       if (current.key === key) {
         this.update(current, value);
-        return;
+        return true;
       }
 
       current.nextNode = node;
