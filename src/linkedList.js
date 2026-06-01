@@ -157,6 +157,20 @@ export class LinkedList {
     
     return arr;
   }
+
+  entries() {
+    const arr = [];
+
+    let current = this.list;
+
+    while(current !== null) {
+      arr.push([current.key, current.value]);
+
+      current = current.nextNode;
+    }
+    
+    return arr;
+  }
 }
 
 class Node {

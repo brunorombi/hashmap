@@ -91,6 +91,18 @@ export class HashMap {
 
     return result;
   }
+
+  entries() {
+    const result = [];
+
+    this.buckets.forEach((bucket) => {
+      if(bucket) {
+        result.push(...bucket.entries());
+      }
+    })
+
+    return result;
+  }
 }
 
 const hashMap = new HashMap();
@@ -104,3 +116,4 @@ hashMap.set("bruno", 1120);
 console.log(hashMap.length());
 console.log(hashMap.keys());
 console.log(hashMap.values());
+console.log(hashMap.entries());
