@@ -34,29 +34,27 @@ export class HashMap {
         this.resize();
       }
      }
-    // console.log(this.buckets[index].toString());
   }
 
   resize() {
     const oldHash = this.buckets;
-
-    // this.size = 0;
-
+    
     this.capacity = this.capacity * 2;
 
-    // this.buckets = Array(this.capacity);
+    this.buckets = new Array(this.capacity);
 
-    // oldHash.forEach(bucket => {
-    //   if(!bucket) {
-    //     let current = bucket.list;
-        
-    //     while(current !== null) {
-    //       this.buckets.set(current.key, current.value)
+    this.size = 0;
 
-    //       current = current.nextNode;
-    //     }
-    //   }
-    // })
+    oldHash.forEach(bucket => {
+      
+      if(bucket !== undefined) {
+        let current = bucket.list;
+        while(current !== null) {
+          this.set(current.key, current.value)
+          current = current.nextNode;
+        }
+      }
+    })
   }
 
   get(key) {

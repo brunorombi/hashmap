@@ -23,8 +23,10 @@ test.set('lion', 'new value')
 
 // Double capacity
 test.set('moon', 'silver')
-test.set('moon', 'silver')
+// test.set('moon', 'silver')
 
 console.log(test.length())
 console.log(test.capacity)
+console.log(test.size)
+console.log(test.entries());
 
