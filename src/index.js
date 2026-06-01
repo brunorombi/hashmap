@@ -23,7 +23,19 @@ test.set('lion', 'new value')
 
 // Double capacity
 test.set('moon', 'silver')
-// test.set('moon', 'silver')
+
+// Overwriting again
+test.set('banana', 'new value')
+test.set('carrot', 'new value')
+test.set('dog', 'new value')
+test.set('elephant', 'new value')
+
+
+//Removing some items
+test.remove('elephant');
+test.remove('dog');
+test.remove('carrot');
+
 
 console.log(test.length())
 console.log(test.capacity)

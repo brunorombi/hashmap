@@ -77,6 +77,7 @@ export class HashMap {
   remove(key) {
     const index = this.hash(key);
     if (this.buckets[index] !== undefined) {
+      this.size--;
       return this.buckets[index].remove(key);
     }
     return false;
